@@ -29,20 +29,24 @@ public class ProfileFragment extends Fragment {
         binding = FragmentProfileBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
+        profileViewModel = new ViewModelProvider(this, new ProfileViewModelFactory(requireContext())).get(ProfileViewModel.class);
         Map<String, ?> userSharePreference = UserSharePreference.getInstance().getSharePreference(requireContext());
 
         String token = String.valueOf(userSharePreference.get("token"));
         int studentId = (int) userSharePreference.get("id");
+        // fetch data from the server
         profileViewModel.fetchProfileInfo(token, studentId);
 
         profileViewModel.getProfileResponseMutableLiveData().observe(getViewLifecycleOwner(), profileResponse -> {
-            Log.i(TAG, profileResponse.getStudent().getEmail());
-            binding.emailTxt.setText(profileResponse.getStudent().getEmail());
-            binding.firstNameTxt.setText(profileResponse.getStudent().getFirstName());
-            binding.lastNameTxt.setText(profileResponse.getStudent().getLastName());
-            binding.phoneTxt.setText(profileResponse.getStudent().getContactNumber());
-            binding.aboutTxt.setText(profileResponse.getStudent().getAbout());
+
+            if (profileResponse != null) {
+                Log.i(TAG, profileResponse.getEmail());
+                binding.emailTxt.setText(profileResponse.getEmail());
+                binding.firstNameTxt.setText(profileResponse.getFirstName());
+                binding.lastNameTxt.setText(profileResponse.getLastName());
+                binding.phoneTxt.setText(profileResponse.getContactNumber());
+                binding.aboutTxt.setText(profileResponse.getAbout());
+            }
         });
 
 
