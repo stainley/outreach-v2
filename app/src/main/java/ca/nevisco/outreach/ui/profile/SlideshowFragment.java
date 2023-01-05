@@ -1,4 +1,4 @@
-package ca.nevisco.outreach.ui.slideshow;
+package ca.nevisco.outreach.ui.profile;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

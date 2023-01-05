@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import ca.nevisco.outreach.data.dto.UserDto;
 
+@Deprecated
 public class UserResponse {
 
     private boolean status;

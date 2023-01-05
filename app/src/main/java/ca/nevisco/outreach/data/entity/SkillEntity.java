@@ -9,6 +9,13 @@ import java.io.Serializable;
 public class SkillEntity implements Serializable {
 
     @PrimaryKey
-    private Long id;
+    private int id;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }
