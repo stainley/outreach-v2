@@ -12,6 +12,8 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.tabs.TabLayout;
 
 import ca.nevisco.outreach.R;
+import ca.nevisco.outreach.ui.profile.personal.PersonalDataFragment;
+import ca.nevisco.outreach.ui.profile.skillset.SkillsetFragment;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -30,21 +32,22 @@ public class ProfileActivity extends AppCompatActivity {
         TabLayout tabMenuSkill = findViewById(R.id.tabMenuSkill);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.fragment_profile_container, new ProfileFragment()).commit();
+        fragmentManager.beginTransaction().replace(R.id.fragment_profile_container, new PersonalDataFragment()).commit();
 
         tabMenuSkill.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                Fragment fragment = new ProfileFragment();
+                Fragment fragment = new PersonalDataFragment();
                 FragmentManager fm = getSupportFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
                 int position = tabMenuSkill.getSelectedTabPosition();
 
                 switch (position) {
                     case 0:
-                        fragment = new ProfileFragment();
+                        fragment = new PersonalDataFragment();
                         break;
-                    case  1:
+                    case 1:
+                        fragment = new SkillsetFragment();
                         // TODO: add skillset
                         break;
                     default:

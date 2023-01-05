@@ -1,17 +1,17 @@
-package ca.nevisco.outreach.ui.profile;
+package ca.nevisco.outreach.ui.profile.personal;
 
-import android.app.Activity;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-public class ProfileViewModelFactory implements ViewModelProvider.Factory {
+@SuppressWarnings("unchecked")
+public class PersonalDataViewModelFactory implements ViewModelProvider.Factory {
 
     private final Context context;
 
-    public ProfileViewModelFactory(Context context) {
+    public PersonalDataViewModelFactory(Context context) {
         this.context = context;
     }
 
@@ -19,6 +19,6 @@ public class ProfileViewModelFactory implements ViewModelProvider.Factory {
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
 
-        return (T) new ProfileViewModel(context);
+        return (T) new PersonalDataViewModel(context);
     }
 }

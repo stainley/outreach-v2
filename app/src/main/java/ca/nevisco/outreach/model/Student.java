@@ -13,22 +13,22 @@ public class Student {
     @PrimaryKey
     private int id;
 
-    @ColumnInfo(name = "USER_ID")
+    @ColumnInfo(name = "user_id")
     @SerializedName("user_id")
     @Expose
     private String userId;
 
-    @ColumnInfo(name = "FIRST_NAME")
+    @ColumnInfo(name = "first_name")
     @SerializedName("first_name")
     @Expose
     private String firstName;
 
-    @ColumnInfo(name = "LAST_NAME")
+    @ColumnInfo(name = "last_name")
     @SerializedName("last_name")
     @Expose
     private String lastName;
 
-    @ColumnInfo(name = "CONTACT_NUMBER")
+    @ColumnInfo(name = "contact_number")
     @SerializedName("contact_number")
     @Expose
     private String contactNumber;
