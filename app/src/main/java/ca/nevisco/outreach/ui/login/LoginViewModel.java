@@ -11,7 +11,6 @@ import ca.nevisco.outreach.network.response.UserResponse;
 import ca.nevisco.outreach.repository.UserRepository;
 
 public class LoginViewModel extends ViewModel {
-
     private static final String TAG = LoginViewModel.class.getName();
     private final MutableLiveData<UserResponse> userResponseData;
     private final UserRepository userRepository;
