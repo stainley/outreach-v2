@@ -1,11 +1,7 @@
 package ca.nevisco.outreach.network;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
-import java.io.IOException;
 
 import ca.nevisco.outreach.network.request.UserRequest;
 import ca.nevisco.outreach.network.response.UserResponse;
@@ -14,10 +10,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class UserServiceImpl {
+public class IUserService {
 
-    private static final String TAG = UserServiceImpl.class.getName();
-/*
     public void loginRemote(UserRequest request, UserRepository.ILoginResponse loginResponse) {
         Call<UserResponse> userResponseCall = ApiClient.getUserService().login(request);
         userResponseCall.enqueue(new Callback<UserResponse>() {
@@ -32,15 +26,11 @@ public class UserServiceImpl {
             }
 
             @Override
-            public void onFailure(Call<UserResponse> call, Throwable t) {
+            public void onFailure(@Nullable Call<UserResponse> call, @Nullable Throwable t) {
                 loginResponse.onFailure(t);
             }
         });
     }
 
-    public interface ILoginResponse {
-        void onResponse(UserResponse userResponse);
 
-        void onFailure(Throwable t);
-    }*/
 }
