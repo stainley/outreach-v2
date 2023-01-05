@@ -31,6 +31,9 @@ public class UserSharePreference {
         if (value instanceof Long) {
             sp.putLong(key, (Long) value);
         }
+        if (value instanceof Integer) {
+            sp.putInt(key, (Integer) value);
+        }
         sp.apply();
     }
 

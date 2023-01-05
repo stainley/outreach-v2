@@ -1,12 +1,17 @@
 package ca.nevisco.outreach.model;
 
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class User {
 
     private int id;
     private String email, password;
+
+    @SerializedName("student")
+    @Expose
+    private Student student;
 
     public int getId() {
         return id;
@@ -30,5 +35,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
     }
 }

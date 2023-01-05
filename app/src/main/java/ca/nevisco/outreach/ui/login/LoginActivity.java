@@ -47,8 +47,11 @@ public class LoginActivity extends AppCompatActivity {
             if (userResponse != null) {
                 if (userResponse.getStatus().equals("true")) {
                     String token = userResponse.getToken();
+                    int studentId = userResponse.getUser().getStudent().getId();
+
                     UserSharePreference userSharePreference = UserSharePreference.getInstance();
                     userSharePreference.persistSharePreference(this, "token", token);
+                    userSharePreference.persistSharePreference(this, "id", studentId);
                     Log.i(TAG, token);
 
                     Intent intent = new Intent(getApplication(), MainActivity.class);

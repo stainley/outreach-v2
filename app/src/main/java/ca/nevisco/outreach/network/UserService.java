@@ -1,10 +1,13 @@
 package ca.nevisco.outreach.network;
 
 import ca.nevisco.outreach.network.request.UserRequest;
+import ca.nevisco.outreach.network.response.ProfileResponse;
 import ca.nevisco.outreach.network.response.UserResponse;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface UserService extends JobService {
 
@@ -14,5 +17,7 @@ public interface UserService extends JobService {
     @POST(value = "/api/signup")
     Call<UserResponse> register(@Body UserRequest request);
 
+    @GET(value = "api/student/{id}")
+    Call<ProfileResponse> getStudentInfo(@Path(value = "id") long id);
 
 }

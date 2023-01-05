@@ -44,6 +44,9 @@ public class ProfileActivity extends AppCompatActivity {
                     case 0:
                         fragment = new ProfileFragment();
                         break;
+                    case  1:
+                        // TODO: add skillset
+                        break;
                     default:
                         Log.e("", "Invalid option");
                 }
