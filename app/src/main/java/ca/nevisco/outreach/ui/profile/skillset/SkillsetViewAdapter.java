@@ -11,12 +11,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import ca.nevisco.outreach.R;
+import ca.nevisco.outreach.databinding.FragmentSkillsetBinding;
+import ca.nevisco.outreach.model.Skill;
 
 public class SkillsetViewAdapter extends RecyclerView.Adapter<SkillsetViewAdapter.SkillViewHolder> {
 
-    private final List<?> skillset;
+    private final List<Skill> skillset;
 
-    public SkillsetViewAdapter(List<?> skillset) {
+    public SkillsetViewAdapter(List<Skill> skillset) {
         this.skillset = skillset;
     }
 

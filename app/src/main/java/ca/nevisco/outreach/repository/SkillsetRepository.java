@@ -5,6 +5,7 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
@@ -57,6 +58,10 @@ public class SkillsetRepository {
                 skillResponse.onFailure(t);
             }
         });
+    }
+
+    public LiveData<List<Skill>> getAllSkills() {
+        return skillDao.getAllSkills();
     }
 
 

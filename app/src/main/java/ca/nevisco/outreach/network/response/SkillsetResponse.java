@@ -24,13 +24,6 @@ public class SkillsetResponse {
     public void setStatus(boolean status) {
         this.status = status;
     }
-    /*public Skillset getSkillset() {
-        return skillset;
-    }
-
-    public void setSkillset(Skillset skillset) {
-        this.skillset = skillset;
-    }*/
 
     public List<Skill> getSkill() {
         return skill;

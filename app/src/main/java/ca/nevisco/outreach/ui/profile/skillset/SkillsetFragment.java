@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,7 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import ca.nevisco.outreach.R;
 import ca.nevisco.outreach.databinding.FragmentSkillsetBinding;
+import ca.nevisco.outreach.model.Skill;
 import ca.nevisco.outreach.sharepref.UserSharePreference;
 
 public class SkillsetFragment extends Fragment {
@@ -32,22 +35,37 @@ public class SkillsetFragment extends Fragment {
         binding = FragmentSkillsetBinding.inflate(inflater, container, false);
         skillsetViewModel = new ViewModelProvider(this, new SkillsetViewModelFactory(requireActivity().getApplication())).get(SkillsetViewModel.class);
 
-        Map<String, ?> sharedPref = UserSharePreference.getInstance().getSharePreference(requireContext());
-        String token = String.valueOf(sharedPref.get("token"));
 
-        getAllSkills(token);
+        getAllSkills();
 
-        List<String> data = new ArrayList<>();
+        List<Skill> skillsData = new ArrayList<>();
+
+        skillsetViewModel.getAllSkills().observe(getViewLifecycleOwner(), skill -> {
+            if (skill != null) {
+                skillsData.addAll(skill);
+            }
+
+        });
+
+        ArrayAdapter<Skill> arrayAdapter = new ArrayAdapter<>(getContext(), R.layout.list_item, skillsData);
+
+        binding.skillSetSpinner.setAdapter(arrayAdapter);
+
         RecyclerView recyclerView = new RecyclerView(requireContext());
-        skillsetViewAdapter = new SkillsetViewAdapter(data);
+        //skillsetViewAdapter = new SkillsetViewAdapter(skillsData);
 
         recyclerView.setLayoutManager(new GridLayoutManager(requireContext(), 1));
         recyclerView.setAdapter(skillsetViewAdapter);
         return binding.getRoot();
     }
 
-    public void getAllSkills(String token) {
-        skillsetViewModel.getAllSkills(token);
+    public void getAllSkills() {
+        skillsetViewModel.getAllSkills(getToken());
+    }
+
+    private String getToken() {
+        Map<String, ?> sharedPref = UserSharePreference.getInstance().getSharePreference(requireContext());
+        return String.valueOf(sharedPref.get("token"));
     }
 
     @Override
