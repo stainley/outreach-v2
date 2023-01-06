@@ -1,17 +1,21 @@
 package ca.nevisco.outreach.network.response;
 
+import androidx.room.Embedded;
+
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
+import ca.nevisco.outreach.model.Skill;
 import ca.nevisco.outreach.model.Skillset;
 
 public class SkillsetResponse {
 
     private boolean status;
 
-    private String message;
-
     @SerializedName("skillset")
-    private Skillset skillsetDto;
+    @Embedded
+    private List<Skill> skill;
 
     public boolean isStatus() {
         return status;
@@ -20,20 +24,19 @@ public class SkillsetResponse {
     public void setStatus(boolean status) {
         this.status = status;
     }
-
-    public String getMessage() {
-        return message;
+    /*public Skillset getSkillset() {
+        return skillset;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setSkillset(Skillset skillset) {
+        this.skillset = skillset;
+    }*/
+
+    public List<Skill> getSkill() {
+        return skill;
     }
 
-    public Skillset getSkillsetDto() {
-        return skillsetDto;
-    }
-
-    public void setSkillsetDto(Skillset skillsetDto) {
-        this.skillsetDto = skillsetDto;
+    public void setSkill(List<Skill> skill) {
+        this.skill = skill;
     }
 }

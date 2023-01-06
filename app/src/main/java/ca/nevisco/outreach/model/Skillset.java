@@ -1,23 +1,37 @@
 package ca.nevisco.outreach.model;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Embedded;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
+
 import com.google.gson.annotations.SerializedName;
 
+import ca.nevisco.outreach.typeconverters.SkillsetConverter;
+
+@Entity
 public class Skillset {
 
+    @PrimaryKey
     private int id;
 
+    @ColumnInfo(name = "skillset_name")
+    private String name;
+
     @SerializedName("student_id")
+    @ColumnInfo(name = "student_id")
     private int studentId;
 
     @SerializedName("skillset_id")
+    @ColumnInfo(name = "skillset_id")
     private String skillsetId;
 
     @SerializedName("total_years_experience")
+    @ColumnInfo(name = "total_year_experience")
     private String totalYearsExperience;
-
-    private String name;
-
     @SerializedName("skill")
+    @Embedded
     private Skill skill;
 
     public int getId() {

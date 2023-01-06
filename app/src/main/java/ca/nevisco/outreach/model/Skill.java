@@ -1,20 +1,17 @@
 package ca.nevisco.outreach.model;
 
-import com.google.gson.annotations.SerializedName;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
-import java.time.LocalDateTime;
-
+@Entity
 public class Skill {
 
+    @PrimaryKey
+    @ColumnInfo(name = "skill_id")
     private int id;
 
     private String name;
-
-    @SerializedName("created_at")
-    private LocalDateTime createdAt;
-
-    @SerializedName("updated_at")
-    private LocalDateTime updatedAt;
 
     public int getId() {
         return id;
@@ -30,21 +27,5 @@ public class Skill {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
     }
 }

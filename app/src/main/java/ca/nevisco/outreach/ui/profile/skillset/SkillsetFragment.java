@@ -14,8 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import ca.nevisco.outreach.databinding.FragmentSkillsetBinding;
+import ca.nevisco.outreach.sharepref.UserSharePreference;
 
 public class SkillsetFragment extends Fragment {
 
@@ -30,6 +32,11 @@ public class SkillsetFragment extends Fragment {
         binding = FragmentSkillsetBinding.inflate(inflater, container, false);
         skillsetViewModel = new ViewModelProvider(this, new SkillsetViewModelFactory(requireActivity().getApplication())).get(SkillsetViewModel.class);
 
+        Map<String, ?> sharedPref = UserSharePreference.getInstance().getSharePreference(requireContext());
+        String token = String.valueOf(sharedPref.get("token"));
+
+        getAllSkills(token);
+
         List<String> data = new ArrayList<>();
         RecyclerView recyclerView = new RecyclerView(requireContext());
         skillsetViewAdapter = new SkillsetViewAdapter(data);
@@ -37,6 +44,10 @@ public class SkillsetFragment extends Fragment {
         recyclerView.setLayoutManager(new GridLayoutManager(requireContext(), 1));
         recyclerView.setAdapter(skillsetViewAdapter);
         return binding.getRoot();
+    }
+
+    public void getAllSkills(String token) {
+        skillsetViewModel.getAllSkills(token);
     }
 
     @Override

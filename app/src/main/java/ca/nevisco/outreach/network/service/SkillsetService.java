@@ -10,7 +10,12 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface SkillsetService {
-    
+
+    /**
+     * Get all skills
+     *
+     * @return SkillsetResponse
+     */
     @GET(value = "api/skillset")
     Call<SkillsetResponse> getAllSkillSet();
 
