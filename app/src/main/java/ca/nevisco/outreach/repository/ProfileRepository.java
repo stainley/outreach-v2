@@ -31,14 +31,13 @@ public class ProfileRepository {
         skillsetDao = db.skillsetDao();
 
         studentLiveData = studentDao.getStudentInfo();
-
     }
 
     public LiveData<Student> getStudentProfileInfo() {
         return studentLiveData;
     }
 
-    public void loginRemote(String token, int studentId, IProfileResponse response) {
+    public void getStudentInfoFromRemote(String token, int studentId, IProfileResponse response) {
         Call<ProfileResponse> studentInfo = ApiClient.getUserServiceWithToken(token).getStudentInfo(studentId);
 
         studentInfo.enqueue(new Callback<ProfileResponse>() {
@@ -53,6 +52,7 @@ public class ProfileRepository {
                     insertProfileInfoDB(profileResponse.body());
 
                     List<Skillset> skillsets = profileResponse.body().getStudent().getSkillsets();
+                    // Insert skillset obtained from the Profile
                     if (skillsets.size() > 0) {
                         skillsets.forEach(skillsetDao::insertSkillset);
                     }

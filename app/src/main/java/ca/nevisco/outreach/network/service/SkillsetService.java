@@ -3,6 +3,7 @@ package ca.nevisco.outreach.network.service;
 import ca.nevisco.outreach.model.Skillset;
 import ca.nevisco.outreach.network.request.SkillsetRequest;
 import ca.nevisco.outreach.network.response.SkillResponse;
+import ca.nevisco.outreach.network.response.SkillsetResponse;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -21,7 +22,7 @@ public interface SkillsetService {
     Call<SkillResponse> getAllSkillSet();
 
     @POST(value = "api/studentSkillset")
-    Call<SkillResponse> addStudentSkillset(@Body SkillsetRequest request);
+    Call<SkillsetResponse> addStudentSkillset(@Body SkillsetRequest request);
 
     @DELETE(value = "api/studentSkillset/{student_skillset_id}")
     Call<SkillResponse> deleteStudentSkillset(@Path(value = "student_skillset_id") long skillsetId);

@@ -24,7 +24,7 @@ public class PersonalDataViewModel extends ViewModel {
 
     public void fetchProfileInfo(String token, int studentId) {
 
-        profileRepository.loginRemote(token, studentId, new ProfileRepository.IProfileResponse() {
+        profileRepository.getStudentInfoFromRemote(token, studentId, new ProfileRepository.IProfileResponse() {
             @Override
             public void onResponse(ProfileResponse profileResponse) {
             }

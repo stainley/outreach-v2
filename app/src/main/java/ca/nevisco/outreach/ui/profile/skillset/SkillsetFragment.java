@@ -15,6 +15,9 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -33,7 +36,6 @@ public class SkillsetFragment extends Fragment {
     FragmentSkillsetBinding binding;
     SkillsetViewModel skillsetViewModel;
     SkillsetViewAdapter skillsetViewAdapter;
-
     private RecyclerView recyclerView;
 
     @Nullable
@@ -70,13 +72,18 @@ public class SkillsetFragment extends Fragment {
             }
 
             SkillsetRequest request = new SkillsetRequest(getUserId(), skillsetDto[0].getId(), Integer.parseInt(year));
-            skillsetViewModel.addStudentSkillset(getToken(), request);
+            skillsetViewModel.addNewSkill(getToken(), request);
 
             arrayAdapter.notifyDataSetChanged();
+            clearField();
 
         });
-
         return binding.getRoot();
+    }
+
+    private void clearField() {
+        binding.skillSetSpinner.setText("");
+        binding.skillYearTxt.setText("");
     }
 
 
@@ -113,6 +120,14 @@ public class SkillsetFragment extends Fragment {
                 skillsetViewAdapter.notifyItemRangeChanged(0, skillsets.size());
             }
 
+        });
+
+        skillsetViewModel.getServiceResponseMessage().observe(getViewLifecycleOwner(), responseMessage -> {
+            Toast.makeText(getContext(), responseMessage, Toast.LENGTH_LONG).show();
+            if (responseMessage.contains("successfully")) {
+                // TODO: Add to the list the new skill and 2 year
+                skillsetViewAdapter.notifyDataSetChanged();
+            }
         });
 
     }
