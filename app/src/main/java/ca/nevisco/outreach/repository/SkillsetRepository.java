@@ -65,7 +65,7 @@ public class SkillsetRepository {
     }
 
 
-    public void insertSkill(Skill... skill) {
+    private void insertSkill(Skill... skill) {
         skillDao.insertSkill(skill);
     }
 

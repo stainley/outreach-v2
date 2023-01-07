@@ -15,10 +15,10 @@ public interface StudentDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(Student student);
 
-    @Query("SELECT * FROM STUDENTS")
+    @Query("SELECT * FROM student")
     LiveData<Student> getStudentInfo();
 
-    @Query("DELETE FROM STUDENTS")
+    @Query("DELETE FROM student")
     void clearStudent();
 
 }

@@ -3,6 +3,7 @@ package ca.nevisco.outreach.model;
 import androidx.room.ColumnInfo;
 import androidx.room.Embedded;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
@@ -16,7 +17,7 @@ public class Skillset {
     @PrimaryKey
     private int id;
 
-    @ColumnInfo(name = "skillset_name")
+    @Ignore
     private String name;
 
     @SerializedName("student_id")

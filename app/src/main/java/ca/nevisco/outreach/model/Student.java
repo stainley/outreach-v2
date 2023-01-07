@@ -2,12 +2,16 @@ package ca.nevisco.outreach.model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+import androidx.room.Relation;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-@Entity(tableName = "STUDENTS")
+import java.util.List;
+
+@Entity(tableName = "student")
 public class Student {
 
     @PrimaryKey
@@ -32,12 +36,15 @@ public class Student {
     @SerializedName("contact_number")
     @Expose
     private String contactNumber;
-
     private int availability;
     private String email;
     private String link;
     private String about;
 
+
+    @SerializedName("skillsets")
+    @Ignore
+    private List<Skillset> skillsets;
     public int getId() {
         return id;
     }
@@ -108,6 +115,14 @@ public class Student {
 
     public void setAbout(String about) {
         this.about = about;
+    }
+
+    public List<Skillset> getSkillsets() {
+        return skillsets;
+    }
+
+    public void setSkillsets(List<Skillset> skillsets) {
+        this.skillsets = skillsets;
     }
 }
 

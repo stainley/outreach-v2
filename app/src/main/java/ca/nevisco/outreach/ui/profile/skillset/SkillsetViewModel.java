@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModel;
 import java.util.List;
 
 import ca.nevisco.outreach.model.Skill;
+import ca.nevisco.outreach.network.request.SkillsetRequest;
 import ca.nevisco.outreach.network.response.SkillsetResponse;
 import ca.nevisco.outreach.repository.SkillsetRepository;
 
@@ -17,14 +18,12 @@ public class SkillsetViewModel extends ViewModel {
 
     private final MutableLiveData<String> errorMessageLiveData;
 
-    private final MutableLiveData<Skill> skillMutableLiveData;
     private static final String TAG = SkillsetViewModel.class.getName();
 
     private final SkillsetRepository skillsetRepository;
 
     public SkillsetViewModel(Application application) {
         skillsetRepository = new SkillsetRepository(application);
-        skillMutableLiveData = new MutableLiveData<>();
         errorMessageLiveData = new MutableLiveData<>();
     }
 
@@ -35,6 +34,7 @@ public class SkillsetViewModel extends ViewModel {
             @Override
             public void onResponse(SkillsetResponse response) {
                 Log.i(TAG, response.getSkill().size() + "");
+
             }
 
             @Override
@@ -46,5 +46,9 @@ public class SkillsetViewModel extends ViewModel {
 
     public LiveData<List<Skill>> getAllSkills() {
         return skillsetRepository.getAllSkills();
+    }
+
+    public void addStudentSkillset(String token, SkillsetRequest request) {
+        Log.i(TAG, request.getSkillsetId() + " - " + request.getStudentId() + " -> Total Year: " + request.getTotalYearsExperience());
     }
 }

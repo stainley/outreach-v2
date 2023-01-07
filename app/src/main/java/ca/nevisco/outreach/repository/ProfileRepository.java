@@ -5,7 +5,11 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 
+import java.util.List;
+
+import ca.nevisco.outreach.dao.SkillsetDao;
 import ca.nevisco.outreach.dao.StudentDao;
+import ca.nevisco.outreach.model.Skillset;
 import ca.nevisco.outreach.model.Student;
 import ca.nevisco.outreach.network.ApiClient;
 import ca.nevisco.outreach.network.response.ProfileResponse;
@@ -17,14 +21,17 @@ import retrofit2.Response;
 public class ProfileRepository {
 
     private final StudentDao studentDao;
-    private JobRoomDatabase db;
     private final LiveData<Student> studentLiveData;
 
+    private final SkillsetDao skillsetDao;
+
     public ProfileRepository(Context application) {
-        db = JobRoomDatabase.getInstance(application);
+        JobRoomDatabase db = JobRoomDatabase.getInstance(application);
         studentDao = db.studentDao();
+        skillsetDao = db.skillsetDao();
 
         studentLiveData = studentDao.getStudentInfo();
+
     }
 
     public LiveData<Student> getStudentProfileInfo() {
@@ -44,6 +51,11 @@ public class ProfileRepository {
                     assert profileResponse.body() != null;
                     studentDao.clearStudent();
                     insertProfileInfoDB(profileResponse.body());
+
+                    List<Skillset> skillsets = profileResponse.body().getStudent().getSkillsets();
+                    if (skillsets.size() > 0) {
+                        skillsets.forEach(skillsetDao::insertSkillset);
+                    }
                 } else {
                     response.onFailure(new Throwable(profileResponse.message()));
                 }
