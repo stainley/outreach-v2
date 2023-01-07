@@ -14,7 +14,7 @@ import ca.nevisco.outreach.dao.SkillsetDao;
 import ca.nevisco.outreach.model.Skill;
 import ca.nevisco.outreach.model.Skillset;
 import ca.nevisco.outreach.network.ApiClient;
-import ca.nevisco.outreach.network.response.SkillsetResponse;
+import ca.nevisco.outreach.network.response.SkillResponse;
 import ca.nevisco.outreach.room.JobRoomDatabase;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -22,31 +22,28 @@ import retrofit2.Response;
 
 public class SkillsetRepository {
 
-    private final JobRoomDatabase db;
     private final SkillsetDao skillsetDao;
 
     private final SkillDao skillDao;
 
     public SkillsetRepository(Application application) {
-        this.db = JobRoomDatabase.getInstance(application);
+        JobRoomDatabase db = JobRoomDatabase.getInstance(application);
         this.skillsetDao = db.skillsetDao();
         this.skillDao = db.skillDao();
     }
 
     public void loadSkillsFromNetwork(String token, ISkillsetResponse skillResponse) {
-        Call<SkillsetResponse> allSkillSet = ApiClient.getUserServiceWithToken(token).getAllSkillSet();
+        Call<SkillResponse> allSkillSet = ApiClient.getUserServiceWithToken(token).getAllSkillSet();
 
-        allSkillSet.enqueue(new Callback<SkillsetResponse>() {
+        allSkillSet.enqueue(new Callback<SkillResponse>() {
 
             @Override
-            public void onResponse(@NonNull Call<SkillsetResponse> call, @NonNull Response<SkillsetResponse> response) {
+            public void onResponse(@NonNull Call<SkillResponse> call, @NonNull Response<SkillResponse> response) {
                 if (response.isSuccessful()) {
 
                     assert response.body() != null;
                     skillResponse.onResponse(response.body());
-                    response.body().getSkill().forEach(skill -> {
-                        insertSkill(skill);
-                    });
+                    response.body().getSkill().forEach(skill -> insertSkill(skill));
 
                 } else {
                     skillResponse.onFailure(new Throwable(response.message()));
@@ -54,7 +51,7 @@ public class SkillsetRepository {
             }
 
             @Override
-            public void onFailure(@Nullable Call<SkillsetResponse> call, @Nullable Throwable t) {
+            public void onFailure(@Nullable Call<SkillResponse> call, @Nullable Throwable t) {
                 skillResponse.onFailure(t);
             }
         });
@@ -62,6 +59,10 @@ public class SkillsetRepository {
 
     public LiveData<List<Skill>> getAllSkills() {
         return skillDao.getAllSkills();
+    }
+
+    public LiveData<List<Skillset>> getAllMySkills() {
+        return skillsetDao.getAllMySkills();
     }
 
 
@@ -72,7 +73,7 @@ public class SkillsetRepository {
 
     public interface ISkillsetResponse {
 
-        void onResponse(SkillsetResponse response);
+        void onResponse(SkillResponse response);
 
         void onFailure(Throwable throwable);
     }

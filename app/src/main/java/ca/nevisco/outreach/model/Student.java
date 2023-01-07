@@ -41,7 +41,6 @@ public class Student {
     private String link;
     private String about;
 
-
     @SerializedName("skillsets")
     @Ignore
     private List<Skillset> skillsets;

@@ -10,8 +10,9 @@ import androidx.lifecycle.ViewModel;
 import java.util.List;
 
 import ca.nevisco.outreach.model.Skill;
+import ca.nevisco.outreach.model.Skillset;
 import ca.nevisco.outreach.network.request.SkillsetRequest;
-import ca.nevisco.outreach.network.response.SkillsetResponse;
+import ca.nevisco.outreach.network.response.SkillResponse;
 import ca.nevisco.outreach.repository.SkillsetRepository;
 
 public class SkillsetViewModel extends ViewModel {
@@ -32,7 +33,7 @@ public class SkillsetViewModel extends ViewModel {
         skillsetRepository.loadSkillsFromNetwork(token, new SkillsetRepository.ISkillsetResponse() {
 
             @Override
-            public void onResponse(SkillsetResponse response) {
+            public void onResponse(SkillResponse response) {
                 Log.i(TAG, response.getSkill().size() + "");
 
             }
@@ -46,6 +47,10 @@ public class SkillsetViewModel extends ViewModel {
 
     public LiveData<List<Skill>> getAllSkills() {
         return skillsetRepository.getAllSkills();
+    }
+
+    public LiveData<List<Skillset>> getAllMySkills() {
+        return skillsetRepository.getAllMySkills();
     }
 
     public void addStudentSkillset(String token, SkillsetRequest request) {

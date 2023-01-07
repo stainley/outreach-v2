@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -13,20 +14,20 @@ import java.util.List;
 import ca.nevisco.outreach.R;
 import ca.nevisco.outreach.databinding.FragmentSkillsetBinding;
 import ca.nevisco.outreach.model.Skill;
+import ca.nevisco.outreach.model.Skillset;
 
 public class SkillsetViewAdapter extends RecyclerView.Adapter<SkillsetViewAdapter.SkillViewHolder> {
 
-    private final List<Skill> skillset;
+    private final List<Skillset> skillset;
 
-    public SkillsetViewAdapter(List<Skill> skillset) {
+    public SkillsetViewAdapter(List<Skillset> skillset) {
         this.skillset = skillset;
     }
 
     @NonNull
     @Override
     public SkillViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Context context = parent.getContext();
-        LayoutInflater inflater = LayoutInflater.from(context);
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.row_skillset, parent, false);
 
         return new SkillViewHolder(view);
@@ -35,6 +36,8 @@ public class SkillsetViewAdapter extends RecyclerView.Adapter<SkillsetViewAdapte
     @Override
     public void onBindViewHolder(@NonNull SkillViewHolder holder, int position) {
 
+        holder.skillNameTxt.setText(skillset.get(position).getSkill().getName());
+        holder.skillYearTxt.setText(skillset.get(position).getTotalYearsExperience());
     }
 
     @Override
@@ -43,9 +46,13 @@ public class SkillsetViewAdapter extends RecyclerView.Adapter<SkillsetViewAdapte
     }
 
     static class SkillViewHolder extends RecyclerView.ViewHolder {
+        private final AppCompatTextView skillNameTxt;
+        private final AppCompatTextView skillYearTxt;
 
         public SkillViewHolder(@NonNull View itemView) {
             super(itemView);
+            skillNameTxt = itemView.findViewById(R.id.skill_name);
+            skillYearTxt = itemView.findViewById(R.id.skill_year);
         }
     }
 }

@@ -1,6 +1,7 @@
 package ca.nevisco.outreach.ui.profile.skillset;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,10 +31,11 @@ public class SkillsetFragment extends Fragment {
     private List<Skill> skillsData = new ArrayList<>();
     final Skill[] skillsetDto = new Skill[1];
     private AutoCompleteTextView dropdownSkill;
-
     FragmentSkillsetBinding binding;
     SkillsetViewModel skillsetViewModel;
     SkillsetViewAdapter skillsetViewAdapter;
+
+    private RecyclerView recyclerView;
 
     @Nullable
     @Override
@@ -42,6 +44,7 @@ public class SkillsetFragment extends Fragment {
         binding = FragmentSkillsetBinding.inflate(inflater, container, false);
         skillsetViewModel = new ViewModelProvider(this, new SkillsetViewModelFactory(requireActivity().getApplication())).get(SkillsetViewModel.class);
         dropdownSkill = binding.skillSetSpinner;
+        recyclerView = binding.skillRecycleView;
 
         getAllSkills();
 
@@ -54,14 +57,9 @@ public class SkillsetFragment extends Fragment {
         });
 
         ArrayAdapter<Skill> arrayAdapter = new ArrayAdapter<>(getContext(), R.layout.list_item, skillsData);
-
         dropdownSkill.setAdapter(arrayAdapter);
 
-        RecyclerView recyclerView = new RecyclerView(requireContext());
-        //skillsetViewAdapter = new SkillsetViewAdapter(skillsData);
-
         recyclerView.setLayoutManager(new GridLayoutManager(requireContext(), 1));
-        recyclerView.setAdapter(skillsetViewAdapter);
 
         onSkillSelected();
 
@@ -81,7 +79,6 @@ public class SkillsetFragment extends Fragment {
 
         return binding.getRoot();
     }
-
 
 
     private void onSkillSelected() {
@@ -110,9 +107,14 @@ public class SkillsetFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //skillsetViewModel.g
+        skillsetViewModel.getAllMySkills().observe(requireActivity(), skillsets -> {
+            if (skillsets.size() > 0) {
+                skillsetViewAdapter = new SkillsetViewAdapter(skillsets);
+                recyclerView.setAdapter(skillsetViewAdapter);
+                skillsetViewAdapter.notifyItemRangeChanged(0, skillsets.size());
+            }
 
-
+        });
 
     }
 }

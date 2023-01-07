@@ -7,9 +7,8 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 import ca.nevisco.outreach.model.Skill;
-import ca.nevisco.outreach.model.Skillset;
 
-public class SkillsetResponse {
+public class SkillResponse {
 
     private boolean status;
 
