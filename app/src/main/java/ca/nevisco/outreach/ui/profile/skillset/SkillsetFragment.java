@@ -1,7 +1,6 @@
 package ca.nevisco.outreach.ui.profile.skillset;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +27,7 @@ import ca.nevisco.outreach.sharepref.UserSharePreference;
 
 public class SkillsetFragment extends Fragment {
 
-    private List<Skill> skillsData = new ArrayList<>();
+    private final List<Skill> skillsData = new ArrayList<>();
     final Skill[] skillsetDto = new Skill[1];
     private AutoCompleteTextView dropdownSkill;
     FragmentSkillsetBinding binding;
@@ -65,7 +64,7 @@ public class SkillsetFragment extends Fragment {
 
         binding.addSkillButton.setOnClickListener(viewButton -> {
             String year = binding.skillYearTxt.getText().toString();
-            if (year.equals("") || dropdownSkill.getText().equals("")) {
+            if (year.equals("") || dropdownSkill.getText().toString().equals("")) {
                 Toast.makeText(requireActivity(), "Could not be empty", Toast.LENGTH_SHORT).show();
                 return;
             }

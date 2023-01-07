@@ -5,10 +5,10 @@
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
 
     <string name="menu_job">Jobs</string>
     <string name="menu_myjobs">My Jobs</string>
     <string name="menu_logout">Logout</string>
     <string name="delete">Delete</string>
+    <string name="action_profile">Profile</string>
 </resources>

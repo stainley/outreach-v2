@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         binding.getRoot();
         int id = item.getItemId();
 
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_profile) {
             Intent profileIntent = new Intent(this, ProfileActivity.class);
             startActivity(profileIntent);
         }

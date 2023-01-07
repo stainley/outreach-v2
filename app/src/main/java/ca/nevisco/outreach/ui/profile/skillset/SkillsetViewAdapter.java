@@ -1,6 +1,5 @@
 package ca.nevisco.outreach.ui.profile.skillset;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import ca.nevisco.outreach.R;
-import ca.nevisco.outreach.databinding.FragmentSkillsetBinding;
-import ca.nevisco.outreach.model.Skill;
 import ca.nevisco.outreach.model.Skillset;
 
 public class SkillsetViewAdapter extends RecyclerView.Adapter<SkillsetViewAdapter.SkillViewHolder> {
